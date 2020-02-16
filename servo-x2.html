@@ -1,0 +1,80 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://obniz.io/js/jquery-3.2.1.min.js"></script>
+  <script src="https://unpkg.com/obniz/obniz.js" crossorigin="anonymous"></script>
+</head>
+<body>
+ 
+<div id="obniz-debug"></div>
+ 
+<div class="wrap">
+ 
+  <div class="led">
+    <h3 class="text-center">Turning on a Geek Servo</h3>
+    <button class="btn btn-primary" id="kubi001">首振り１</button>
+    <button class="btn btn-primary" id="kubi002">首振り２</button>
+
+    <button class="btn btn-primary" id="zero">初期位置</button>
+
+    <button class="btn btn-primary" id="una001">頷き１</button>
+    <button class="btn btn-primary" id="una002">頷き２</button>
+  </div>
+ 
+</div>
+ 
+<script>
+  var obniz = new Obniz("obniz_id");
+  obniz.onconnect = async function () {
+
+    obniz.display.clear();
+    obniz.display.print("Hello World");
+     
+    var servo1 = obniz.wired("ServoMotor", {gnd:0,vcc:1,signal:2});
+    servo1.angle(90.0);
+    var servo2 = obniz.wired("ServoMotor", {gnd:9,vcc:10,signal:11});
+    servo2.angle(90.0);
+ 
+    $('#kubi001').click(function () {
+      servo1.angle(60.0);
+      servo2.angle(60.0);
+      obniz.display.clear();
+      obniz.display.print("kubi001");
+    });
+ 
+    $('#kubi002').click(function () {
+      servo1.angle(120.0);
+      servo2.angle(120.0);
+      obniz.display.clear();
+      obniz.display.print("kubi002");
+    });
+
+    $('#una001').click(function () {
+
+      servo1.angle( 60.0);
+      servo2.angle(120.0);
+      obniz.display.clear();
+      obniz.display.print("una001");
+    });
+ 
+    $('#una002').click(function () {
+
+      servo1.angle(120.0);
+      servo2.angle( 60.0);
+      obniz.display.clear();
+      obniz.display.print("una002");
+    });
+
+    $('#zero').click(function () {
+
+      servo1.angle( 90.0);
+      servo2.angle( 90.0);
+      obniz.display.clear();
+      obniz.display.print("zero");
+    });
+  };
+</script>
+</body>
+</html>
