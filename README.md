@@ -1,0 +1,2 @@
+# obniz
+obniz スクリプトメモ
